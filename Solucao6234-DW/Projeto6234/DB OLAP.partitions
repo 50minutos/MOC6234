@@ -1,0 +1,152 @@
+﻿<Cube xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ddl2="http://schemas.microsoft.com/analysisservices/2003/engine/2" xmlns:ddl2_2="http://schemas.microsoft.com/analysisservices/2003/engine/2/2" xmlns:ddl100_100="http://schemas.microsoft.com/analysisservices/2008/engine/100/100" xmlns:ddl200="http://schemas.microsoft.com/analysisservices/2010/engine/200" xmlns:ddl200_200="http://schemas.microsoft.com/analysisservices/2010/engine/200/200" xmlns:dwd="http://schemas.microsoft.com/DataWarehouse/Designer/1.0" dwd:design-time-name="49c5e7ad-a055-4efe-83dc-7b20aa220339" xmlns="http://schemas.microsoft.com/analysisservices/2003/engine">
+  <ID>DB OLAP</ID>
+  <MeasureGroups>
+    <MeasureGroup>
+      <ID>FATO VENDA</ID>
+      <Partitions>
+        <Partition dwd:design-time-name="16c04574-ce4d-4f05-81ad-09176bfddd21">
+          <ID>FATO VENDA</ID>
+          <Name>FATO VENDA ANOS ANTERIORES A 2013</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="f1f2ab89-bcb4-4c71-82c2-a936aaab121e">
+            <DataSourceID>DB OLAP</DataSourceID>
+            <QueryDefinition>SELECT [dbo].[FATO_VENDA].[DATA_PEDIDO],[dbo].[FATO_VENDA].[COD_CLIENTE],[dbo].[FATO_VENDA].[COD_FUNCIONARIO],[dbo].[FATO_VENDA].[COD_PRODUTO],[dbo].[FATO_VENDA].[PRECO_ITEM_PEDIDO],[dbo].[FATO_VENDA].[QTD_ITEM_PEDIDO],QTD_ITEM_PEDIDO * PRECO_ITEM_PEDIDO AS [TOTAL_ITEM_PEDIDO]
+		FROM [dbo].[FATO_VENDA]
+		WHERE YEAR(DATA_PEDIDO) &lt; 2013</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <ProactiveCaching dwd:design-time-name="52a60b13-1dcf-4ae5-a8b2-f1f835023c15">
+            <SilenceInterval>-PT1S</SilenceInterval>
+            <Latency>-PT1S</Latency>
+            <SilenceOverrideInterval>-PT1S</SilenceOverrideInterval>
+            <ForceRebuildInterval>-PT1S</ForceRebuildInterval>
+            <AggregationStorage>MolapOnly</AggregationStorage>
+            <Source xsi:type="ProactiveCachingInheritedBinding" dwd:design-time-name="977716ff-1936-4294-88f8-4279e0bda931">
+              <NotificationTechnique>Server</NotificationTechnique>
+            </Source>
+          </ProactiveCaching>
+          <EstimatedRows>5</EstimatedRows>
+          <AggregationDesignID>AGREGACAO</AggregationDesignID>
+        </Partition>
+        <Partition dwd:design-time-name="b4d4805d-2852-42ca-bbfe-eaff6d8c3ed2">
+          <ID>FATO VENDA ANO 2013</ID>
+          <Name>FATO VENDA ANO 2013</Name>
+          <CreatedTimestamp>0001-01-01T00:00:00Z</CreatedTimestamp>
+          <LastSchemaUpdate>0001-01-01T00:00:00Z</LastSchemaUpdate>
+          <LastProcessed>0001-01-01T00:00:00Z</LastProcessed>
+          <State>Unprocessed</State>
+          <Source xsi:type="QueryBinding" dwd:design-time-name="b209bede-dc96-4ce1-96fd-4fd56c72c0c1">
+            <DataSourceID>DB OLAP</DataSourceID>
+            <QueryDefinition>SELECT [dbo].[FATO_VENDA].[DATA_PEDIDO],[dbo].[FATO_VENDA].[COD_CLIENTE],[dbo].[FATO_VENDA].[COD_FUNCIONARIO],[dbo].[FATO_VENDA].[COD_PRODUTO],[dbo].[FATO_VENDA].[PRECO_ITEM_PEDIDO],[dbo].[FATO_VENDA].[QTD_ITEM_PEDIDO],QTD_ITEM_PEDIDO * PRECO_ITEM_PEDIDO AS [TOTAL_ITEM_PEDIDO]
+		FROM [dbo].[FATO_VENDA]
+		WHERE YEAR(DATA_PEDIDO) = 2013</QueryDefinition>
+          </Source>
+          <StorageMode>Molap</StorageMode>
+          <CurrentStorageMode>Molap</CurrentStorageMode>
+          <ProcessingMode>Regular</ProcessingMode>
+          <AggregationDesignID>AGREGACAO</AggregationDesignID>
+        </Partition>
+      </Partitions>
+      <AggregationDesigns>
+        <AggregationDesign>
+          <ID>AGREGACAO</ID>
+          <Name>AGREGACAO</Name>
+          <CreatedTimestamp>2013-08-08T23:11:09.886667Z</CreatedTimestamp>
+          <LastSchemaUpdate>2013-08-08T23:11:09.886667Z</LastSchemaUpdate>
+          <EstimatedRows>5</EstimatedRows>
+          <Dimensions>
+            <Dimension>
+              <CubeDimensionID>DIMENSAO PRODUTO</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>COD PRODUTO</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME PRODUTO</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIMENSAO FUNCIONARIO</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>COD FUNCIONARIO</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME FUNCIONARIO</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME CIDADE</AttributeID>
+                  <EstimatedCount>8</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME UF</AttributeID>
+                  <EstimatedCount>26</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIMENSAO CLIENTE</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>COD CLIENTE</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME CLIENTE</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>DESCRICAO SEXO CLIENTE</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME CIDADE</AttributeID>
+                  <EstimatedCount>8</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME UF</AttributeID>
+                  <EstimatedCount>26</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+            <Dimension>
+              <CubeDimensionID>DIMENSAO TEMPO</CubeDimensionID>
+              <Attributes>
+                <Attribute>
+                  <AttributeID>DATA</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>ANO</AttributeID>
+                  <EstimatedCount>2</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>MES</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME MES</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+                <Attribute>
+                  <AttributeID>NOME MES PT BR</AttributeID>
+                  <EstimatedCount>4</EstimatedCount>
+                </Attribute>
+              </Attributes>
+            </Dimension>
+          </Dimensions>
+        </AggregationDesign>
+      </AggregationDesigns>
+    </MeasureGroup>
+  </MeasureGroups>
+</Cube>
